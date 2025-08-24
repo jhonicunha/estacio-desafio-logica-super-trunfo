@@ -47,25 +47,18 @@ int main() {
 
     // Cadastro da Carta 2 via console
     printf("\nCADASTRO DA CARTA 2\n");
-
     printf("Estado da cidade (Uma letra de A a H):\n");
     scanf(" %s", estado_carta2);
-
     printf("Codigo da cidade (Um número de 01 a 04):\n");
     scanf(" %s", codigo_carta2);
-
     printf("Nome da cidade:\n");
     scanf(" %s", nome_cidade_carta2);
-
     printf("População:\n");
     scanf(" %u", &populacao_carta2);
-
     printf("Area(km²):\n");
     scanf(" %f", &area_carta2);
-
     printf("Pib:\n");
     scanf(" %f", &pib_carta2);
-
     printf("Pontos turisticos:\n");
     scanf(" %u", &pontosTuristicos_carta2);
 
