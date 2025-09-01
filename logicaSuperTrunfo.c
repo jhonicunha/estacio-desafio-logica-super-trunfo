@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-// Desafio Lógica Super Trunfo - Nível Aventureiro
+// Desafio Lógica Super Trunfo - Nível Mestre - Versão Final
 
 int main() {
     // Variáveis da Carta 1
@@ -24,6 +24,12 @@ int main() {
     int pontosTuristicos_carta2;
     float densidade_populacional_carta2;
     float pib_per_capita_carta2;
+
+    // Variáveis para a lógica do Nível Mestre
+    int escolha1, escolha2;
+    float valor_attr1_carta1, valor_attr2_carta1;
+    float valor_attr1_carta2, valor_attr2_carta2;
+    float soma_carta1, soma_carta2;
 
     //  Impressao e Scan no console para cadastrar as cartas
     printf("|---------------------------------------|\n");
@@ -98,8 +104,6 @@ int main() {
     printf("Densidade Populacional: %.2f hab/km²\n", densidade_populacional_carta2);
     printf("PIB per Capita: %.2f reais\n", pib_per_capita_carta2);
 
-    int escolha; // Variável para guardar a escolha
-
     printf("\n--- ESCOLHA SEU ATRIBUTO PARA A BATALHA ---\n");
     printf("1. Populacao\n");
     printf("2. Area\n");
@@ -107,68 +111,45 @@ int main() {
     printf("4. Pontos Turisticos\n");
     printf("5. Densidade Populacional\n");
     printf("Escolha uma opcao (1-5): ");
+    scanf("%d", &escolha1);
 
-    scanf("%d", &escolha);
+    printf("\n--- ESCOLHA O SEGUNDO ATRIBUTO (diferente do primeiro) ---\n");
+    printf("Escolha uma opcao (1-5): ");
+    scanf("%d", &escolha2);
 
-    switch (escolha) {
-        case 1:
-            printf("\n--- Resultado da Batalha (Populacao) ---\n");
-            if (populacao_carta1 > populacao_carta2) {
-                printf("Carta 1 (%s) venceu!\n", nome_cidade_carta1);
-            } else if (populacao_carta2 > populacao_carta1) {
-                printf("Carta 2 (%s) venceu!\n", nome_cidade_carta2);
-            } else {
-                printf("Resultado: Empate!\n");
-            }
-            break;
+    if (escolha1 == escolha2) {
+        printf("\nErro: Voce nao pode escolher o mesmo atributo duas vezes!\n");
+    } else {
+        // Switch para o primeiro atributo
+        switch (escolha1) {
+            case 1: valor_attr1_carta1 = (float)populacao_carta1; valor_attr1_carta2 = (float)populacao_carta2; break;
+            case 2: valor_attr1_carta1 = area_carta1; valor_attr1_carta2 = area_carta2; break;
+            case 3: valor_attr1_carta1 = pib_carta1; valor_attr1_carta2 = pib_carta2; break;
+            case 4: valor_attr1_carta1 = (float)pontosTuristicos_carta1; valor_attr1_carta2 = (float)pontosTuristicos_carta2; break;
+            case 5: valor_attr1_carta1 = densidade_populacional_carta1; valor_attr1_carta2 = densidade_populacional_carta2; break;
+            default: printf("Primeira escolha invalida!\n"); return 1;
+        }
 
-        case 2:
-            printf("\n--- Resultado da Batalha (Area) ---\n");
-            if (area_carta1 > area_carta2) {
-                printf("Carta 1 (%s) venceu!\n", nome_cidade_carta1);
-            } else if (area_carta2 > area_carta1) {
-                printf("Carta 2 (%s) venceu!\n", nome_cidade_carta2);
-            } else {
-                printf("Resultado: Empate!\n");
-            }
-            break;
+        // Switch para o segundo atributo
+        switch (escolha2) {
+            case 1: valor_attr2_carta1 = (float)populacao_carta1; valor_attr2_carta2 = (float)populacao_carta2; break;
+            case 2: valor_attr2_carta1 = area_carta1; valor_attr2_carta2 = area_carta2; break;
+            case 3: valor_attr2_carta1 = pib_carta1; valor_attr2_carta2 = pib_carta2; break;
+            case 4: valor_attr2_carta1 = (float)pontosTuristicos_carta1; valor_attr2_carta2 = (float)pontosTuristicos_carta2; break;
+            case 5: valor_attr2_carta1 = densidade_populacional_carta1; valor_attr2_carta2 = densidade_populacional_carta2; break;
+            default: printf("Segunda escolha invalida!\n"); return 1;
+        }
+    }
+    // Calcular a soma dos atributos para cada carta
+    soma_carta1 = valor_attr1_carta1 + valor_attr2_carta1;
+    soma_carta2 = valor_attr1_carta2 + valor_attr2_carta2;
 
-        case 3:
-            printf("\n--- Resultado da Batalha (PIB) ---\n");
-            if (pib_carta1 > pib_carta2) {
-                printf("Carta 1 (%s) venceu!\n", nome_cidade_carta1);
-            } else if (pib_carta2 > pib_carta1) {
-                printf("Carta 2 (%s) venceu!\n", nome_cidade_carta2);
-            } else {
-                printf("Resultado: Empate!\n");
-            }
-            break;
-
-        case 4:
-            printf("\n--- Resultado da Batalha (Pontos Turisticos) ---\n");
-            if (pontosTuristicos_carta1 > pontosTuristicos_carta2) {
-                printf("Carta 1 (%s) venceu!\n", nome_cidade_carta1);
-            } else if (pontosTuristicos_carta2 > pontosTuristicos_carta1) {
-                printf("Carta 2 (%s) venceu!\n", nome_cidade_carta2);
-            } else {
-                printf("Resultado: Empate!\n");
-            }
-            break;
-
-        case 5:
-            printf("\n--- Resultado da Batalha (Densidade Populacional) ---\n");
-            if (densidade_populacional_carta1 < densidade_populacional_carta2) {
-                printf("Carta 1 (%s) venceu!\n", nome_cidade_carta1);
-            } else if (densidade_populacional_carta2 < densidade_populacional_carta1) {
-                printf("Carta 2 (%s) venceu!\n", nome_cidade_carta2);
-            } else {
-                printf("Resultado: Empate!\n");
-            }
-            break;
-
-        default:
-            printf("Opcao invalida!\n");
-            break;
+    // Comparar as somas e determinar o vencedor
+    if (soma_carta1 == soma_carta2) {
+        printf("VENCEDOR: Empate na soma dos atributos!\n");
+    } else {
+        char* nome_vencedor = (soma_carta1 > soma_carta2) ? nome_cidade_carta1 : nome_cidade_carta2;
+        printf("VENCEDOR: A carta (%s) venceu com a maior soma!\n", nome_vencedor);
     }
 
     return 0;
